@@ -16,10 +16,10 @@ function App() {
            <div className="collapse navbar-collapse">
              <ul className="navbar-nav mr-auto">
                <li className="nav-item">
-                 <Link to={'/CreateEmployee'} className="nav-link">Add Funcionario</Link>
+                 <Link to={'/CreateEmployee'} className="nav-link"><h3>Adicionar Funcionário</h3></Link>
                </li>
                <li className="nav-item">
-                 <Link to={'/EmployeeList'} className="nav-link">lista Funcionario</Link>
+                 <Link to={'/EmployeeList'} className="nav-link"><h3>Lista de Funcionário</h3></Link>
                </li> 
              </ul>
 
@@ -27,12 +27,13 @@ function App() {
          </nav> <br/>
          <Switch>
            <Route exact path='/CreateEmployee' component={CreateEmployee}/>
-           <Route  path='/EditEmployee' component={EditEmployee}/>
+           <Route  path='/EditEmployee/:id' component={EditEmployee}/>
            <Route  path='/EmployeeList' component={EmployeeList}/>
 
          </Switch>
        </div>
      </Router>
+     
     </div>
   );
 }

@@ -22,7 +22,7 @@ import {
     bornDate: "",
     position: "",
   });
-  const [showLoading, setShowLoading] = useState(false);
+  
   const apiUrl = "http://localhost:3000/employees";
 
   const InsertEmployee = (event) => {
@@ -30,7 +30,7 @@ import {
     const data = {
       name: employee.name,
       salary: employee.salary,
-      bornDate: employee.bornDate,
+      bornDate:employee.bornDate,
       position: employee.position,
     };
     axios.post(apiUrl, data).then((result) => {
@@ -44,13 +44,13 @@ import {
   
     return (
       <div className="app flex-row align-items-center">
-        <Container>
+        <Container >
           <Row className="justfy-content-center">
             <Col md="12" lg="10" xl="8">
-              <Card className="mx-6">
+              <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form onSubmit={InsertEmployee}>
-                    <h1> Register </h1>
+                    <h1> Cadastro de Funcionário </h1>
                     <InputGroup className="mb-3">
                       <input
                         type="text"
@@ -59,11 +59,12 @@ import {
                         placeholder="Nome"
                         value={employee.name}
                         onChange={onChange}
+                        
                       />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <input
-                        type="text"
+                        type="Number"
                         name="salary"
                         id="salary"
                         placeholder="Salário"
@@ -73,7 +74,7 @@ import {
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <input
-                        type="text"
+                        type="date"
                         name="bornDate"
                         id="bornDate"
                         placeholder="Data Nascimento"
@@ -95,12 +96,12 @@ import {
                         <Row>
                             <Col xs="12" sm="6">
                                 <Button type="submit" className="btn btn-info mb-1" block>
-                                    <span>Save</span>
+                                    <span>Registar</span>
                                 </Button>
                             </Col>
                             <Col xs="12" sm="6">
                                 <Button  className="btn btn-danger mb-1" block>
-                                    <span>Cancel</span>
+                                    <span>Cancelar</span>
                                 </Button>
                             </Col>
                         </Row>

@@ -23,27 +23,28 @@ export const EditEmployee = (props) => {
     position: "",
   });
 
-  const Url = "http://localhost:3000/employees" ;
+  const Url = "http://localhost:3000//employees/:id=" + props.match.params.id;
 
   useEffect(() => {
     const GetData = async () => {
       const result = await axios(Url);
-      setEmployee(result.data);
+            setEmployee(result.data);
     };
     GetData();
-  }, []);
+  },[]);
 
   const UpdateEmployee = (event) => {
-    event.preventeDefault();
+    event.preventDefault();
     const data = {
-      Id: props.match.params.id,
+      id: props.match.params.id,
       name: employee.name,
       salary: employee.salary,
       bornDate: employee.bornDate,
       position: employee.position,
     };
-    axios.post(`http://localhost:3000/employees`, data).then((result) => {
-      props.history.push("/EmployeeList");
+    axios.put(`http://localhost:3000/employees/`, data).then((result) => {
+    
+      props.history.push("/employees");
     });
   };
 
@@ -73,7 +74,7 @@ export const EditEmployee = (props) => {
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <input
-                      type="text"
+                      type="number"
                       name="salary"
                       id="salary"
                       placeholder="Salário"
@@ -83,7 +84,7 @@ export const EditEmployee = (props) => {
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <input
-                      type="text"
+                      type="date"
                       name="bornDate"
                       id="bornDate"
                       placeholder="Data Nascimento"
@@ -105,12 +106,12 @@ export const EditEmployee = (props) => {
                     <Row>
                       <Col xs="12" sm="6">
                         <Button type="submit" className="btn btn-info mb-1" block>
-                          <span>Save</span>
+                          <span>Salvar</span>
                         </Button>
                       </Col>
                       <Col xs="12" sm="6">
                         <Button type="submit" className="btn btn-info mb-1" block>
-                          <span>Cancel</span>
+                          <span>Cancelar</span>
                         </Button>
                       </Col>
                     </Row>

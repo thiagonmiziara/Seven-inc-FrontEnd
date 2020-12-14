@@ -26,14 +26,14 @@ export const EmployeeList = (props) => {
   }, []);
 
   const deleteEmployee = (id) => {
-    axios.delete("http://localhost:3000/employees/:id" + id).then((result) => {
+    axios.delete(`http://localhost:3000/employees/${id}`).then((result) => {
       props.history.push("/EmployeeList");
     });
   };
 
   const editEmployee = (id) => {
     props.history.push({
-      pathname: "http://localhost:3000/employees/:id" + id,
+      pathname: `/EditEmployee/${id}`,
     });
   };
 
@@ -43,43 +43,41 @@ export const EmployeeList = (props) => {
         <Col>
           <Card>
             <CardHeader>
-              <i className="fa fa-align-justify"></i>
-              <h1>Lista de Funcionários</h1>
+              <i className="fa fa-align-justify"> </i>
+              <h1> Lista de Funcionários </h1>
             </CardHeader>
             <CardBody>
               <Table hover bordered striped responsive size="sm">
                 <thead>
                   <tr>
-                    <th>Nome</th>
-                    <th>Cargo</th>
-                    <th>Data Nascimento</th>
-                    <th>Salário</th>
+                    <th> Nome </th> <th> Cargo </th> <th> Data Nascimento </th>
+                    <th> Salário </th>
                   </tr>
                 </thead>
                 <tbody>
                   {data.map((item, index) => {
                     return (
-                      <tr Key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.position}</td>
+                      <tr key={index}>
+                        <td> {item.name} </td> <td> {item.position} </td>
                         <td>
                           <Moment format="DD/MM/YYYY">{item.bornDate}</Moment>
                         </td>
-                        <td>R${item.salary}</td>
+                        <td> R$ {item.salary} </td>
                         <td>
                           <div className="btn-group">
                             <button
-                              className="btn btn-warning"
+                              className="btn btn-primary"
                               onClick={() => {
-                                editEmployee(item.Id);
+                                editEmployee(item.id);
                               }}
                             >
                               Edit
                             </button>
+
                             <button
-                              className="btn btn-warning"
+                              className="btn btn-danger"
                               onClick={() => {
-                                deleteEmployee(item.Id);
+                                deleteEmployee(item.id);
                               }}
                             >
                               Delete
