@@ -23,11 +23,11 @@ export const EditEmployee = (props) => {
     position: "",
   });
 
-  const Url = "http://localhost:3000//employees/:id=" + props.match.params.id;
+  const Url = `http://localhost:3000/employees/${props.match.params.id}`;;
 
   useEffect(() => {
     const GetData = async () => {
-      const result = await axios(Url);
+      const result = await axios.get(Url);
             setEmployee(result.data);
     };
     GetData();
@@ -42,7 +42,7 @@ export const EditEmployee = (props) => {
       bornDate: employee.bornDate,
       position: employee.position,
     };
-    axios.put(`http://localhost:3000/employees/`, data).then((result) => {
+    axios.put(Url, data).then((result) => {
     
       props.history.push("/employees");
     });
@@ -110,7 +110,7 @@ export const EditEmployee = (props) => {
                         </Button>
                       </Col>
                       <Col xs="12" sm="6">
-                        <Button type="submit" className="btn btn-info mb-1" block>
+                        <Button type="submit" className="btn btn-danger mb-1" block>
                           <span>Cancelar</span>
                         </Button>
                       </Col>
