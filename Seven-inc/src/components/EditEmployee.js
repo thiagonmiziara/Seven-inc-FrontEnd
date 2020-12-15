@@ -12,7 +12,6 @@ import {
   InputGroup,
   Row,
 } from "reactstrap";
-import { Redirect } from "react-router-dom";
 
 export const EditEmployee = (props) => {
   const [employee, setEmployee] = useState({
@@ -53,7 +52,7 @@ export const EditEmployee = (props) => {
 
   return (
     <div className="app flex-row aling-items-center">
-      <Container>
+      <Container className="themed-container" fluid={true}>
         <Row className="justfy-content-center">
           <Col py-2 border rounded>
             <Card className="mx-4">
@@ -107,9 +106,12 @@ export const EditEmployee = (props) => {
                   <CardFooter className="p-4">
                     <Row>
                       <Col xs="12" sm="6">
-                        <Button onClick={()=>{
-                          window.location.replace("http://localhost:3001/EmployeeList");
-                        }}
+                        <Button
+                          onClick={() => {
+                            window.location.replace(
+                              "http://localhost:3001/EmployeeList"
+                            );
+                          }}
                           type="submit"
                           className="btn btn-info mb-1"
                           block
@@ -119,6 +121,11 @@ export const EditEmployee = (props) => {
                       </Col>
                       <Col xs="12" sm="6">
                         <Button
+                          onClick={() => {
+                            window.location.replace(
+                              "http://localhost:3001/EmployeeList"
+                            );
+                          }}
                           type="submit"
                           className="btn btn-danger mb-1"
                           block

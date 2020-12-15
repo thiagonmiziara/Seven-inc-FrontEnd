@@ -45,8 +45,8 @@ export const EmployeeList = (props) => {
               <h1> Lista de Funcionários </h1>
             </CardHeader>
             <CardBody>
-              <Table bordered striped responsive size="sm">
-                <thead>
+              <Table responsive bordered striped size="sm" >
+                <thead >
                   <tr>
                     <th> Nome </th> <th> Cargo </th> <th> Data Nascimento </th>
                     <th> Salário </th>

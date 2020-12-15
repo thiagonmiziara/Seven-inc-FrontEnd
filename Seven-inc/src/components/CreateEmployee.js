@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import {
   Button,
@@ -42,7 +42,7 @@ export const CreateEmployee = (props) => {
 
   return (
     <div className="app flex-row align-items-center">
-      <Container>
+      <Container className="themed-container" fluid={true}>
         <Row className="justfy-content-center mx-">
           <Col py-2 border rounded>
             <Card className="mx-4">
@@ -110,7 +110,10 @@ export const CreateEmployee = (props) => {
                         </Button>
                       </Col>
                       <Col py-2 border rounded>
-                        <Button className="btn btn-danger mb-1" block>
+                        <Button className="btn btn-danger mb-1" block
+                        onClick={()=>{
+                          window.location.replace("http://localhost:3001/EmployeeList");
+                        }}>
                           <span> Cancelar </span>
                         </Button>
                       </Col>
