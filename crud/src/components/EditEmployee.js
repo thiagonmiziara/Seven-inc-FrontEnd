@@ -10,10 +10,9 @@ import {
   Form,
   Input,
   InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Row,
 } from "reactstrap";
+import { Redirect } from "react-router-dom";
 
 export const EditEmployee = (props) => {
   const [employee, setEmployee] = useState({
@@ -23,15 +22,15 @@ export const EditEmployee = (props) => {
     position: "",
   });
 
-  const Url = `http://localhost:3000/employees/${props.match.params.id}`;;
+  const Url = `http://localhost:3000/employees/${props.match.params.id}`;
 
   useEffect(() => {
     const GetData = async () => {
       const result = await axios.get(Url);
-            setEmployee(result.data);
+      setEmployee(result.data);
     };
     GetData();
-  },[]);
+  }, []);
 
   const UpdateEmployee = (event) => {
     event.preventDefault();
@@ -43,7 +42,6 @@ export const EditEmployee = (props) => {
       position: employee.position,
     };
     axios.put(Url, data).then((result) => {
-    
       props.history.push("/employees");
     });
   };
@@ -57,13 +55,14 @@ export const EditEmployee = (props) => {
     <div className="app flex-row aling-items-center">
       <Container>
         <Row className="justfy-content-center">
-          <Col md="12" lg="10" xl="8">
+          <Col py-2 border rounded>
             <Card className="mx-4">
               <CardBody className="p-4">
                 <Form onSubmit={UpdateEmployee}>
-                  <h1> Atualiza Funcionário </h1>
+                  <h1> Atualizar Funcionário </h1>
                   <InputGroup className="mb-3">
-                    <input
+                    <Input
+                      className="form-control"
                       type="text"
                       name="name"
                       id="name"
@@ -73,7 +72,8 @@ export const EditEmployee = (props) => {
                     />
                   </InputGroup>
                   <InputGroup className="mb-3">
-                    <input
+                    <Input
+                      className="form-control"
                       type="number"
                       name="salary"
                       id="salary"
@@ -83,7 +83,8 @@ export const EditEmployee = (props) => {
                     />
                   </InputGroup>
                   <InputGroup className="mb-3">
-                    <input
+                    <Input
+                      className="form-control"
                       type="date"
                       name="bornDate"
                       id="bornDate"
@@ -93,7 +94,8 @@ export const EditEmployee = (props) => {
                     />
                   </InputGroup>
                   <InputGroup className="mb-3">
-                    <input
+                    <Input
+                      className="form-control"
                       type="text"
                       name="position"
                       id="position"
@@ -105,12 +107,22 @@ export const EditEmployee = (props) => {
                   <CardFooter className="p-4">
                     <Row>
                       <Col xs="12" sm="6">
-                        <Button type="submit" className="btn btn-info mb-1" block>
+                        <Button onClick={()=>{
+                          window.location.replace("http://localhost:3001/EmployeeList");
+                        }}
+                          type="submit"
+                          className="btn btn-info mb-1"
+                          block
+                        >
                           <span>Salvar</span>
                         </Button>
                       </Col>
                       <Col xs="12" sm="6">
-                        <Button type="submit" className="btn btn-danger mb-1" block>
+                        <Button
+                          type="submit"
+                          className="btn btn-danger mb-1"
+                          block
+                        >
                           <span>Cancelar</span>
                         </Button>
                       </Col>

@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-  Badge,
+  Button,
   Card,
   CardBody,
   CardHeader,
   Col,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Row,
   Table,
 } from "reactstrap";
@@ -16,19 +13,20 @@ import Moment from "react-moment";
 
 export const EmployeeList = (props) => {
   const [data, setData] = useState([]);
+  const GetData = async () => {
+    const result = await axios("http://localhost:3000/employees");
+    setData(result.data);
+  };
 
   useEffect(() => {
-    const GetData = async () => {
-      const result = await axios("http://localhost:3000/employees");
-      setData(result.data);
-    };
     GetData();
   }, []);
 
   const deleteEmployee = (id) => {
-    axios.delete(`http://localhost:3000/employees/${id}`).then((result) => {
-      props.history.push("/EmployeeList");
-    });
+    axios
+      .delete(`http://localhost:3000/employees/${id}`)
+      .then(() => GetData())
+      .catch((err) => console.log(err));
   };
 
   const editEmployee = (id) => {
@@ -40,14 +38,14 @@ export const EmployeeList = (props) => {
   return (
     <div className="animated fadeIn">
       <Row>
-        <Col>
+        <Col py-2 border rounded>
           <Card>
             <CardHeader>
               <i className="fa fa-align-justify"> </i>
               <h1> Lista de Funcionários </h1>
             </CardHeader>
             <CardBody>
-              <Table hover bordered striped responsive size="sm">
+              <Table bordered striped responsive size="sm">
                 <thead>
                   <tr>
                     <th> Nome </th> <th> Cargo </th> <th> Data Nascimento </th>
@@ -65,23 +63,30 @@ export const EmployeeList = (props) => {
                         <td> R$ {item.salary} </td>
                         <td>
                           <div className="btn-group">
-                            <button
-                              className="btn btn-primary"
+                            <Button
+                              className=" btn-icon"
+                              color="info"
+                              size="ls"
+                              type="submit"
                               onClick={() => {
                                 editEmployee(item.id);
                               }}
                             >
                               Edit
-                            </button>
+                            </Button>
 
-                            <button
-                              className="btn btn-danger"
+                            <Button
+                              className=" btn-icon"
+                              color="danger"
+                              size="sm"
+                              type="submit"
                               onClick={() => {
                                 deleteEmployee(item.id);
+                                window.location.reload();
                               }}
                             >
                               Delete
-                            </button>
+                            </Button>
                           </div>
                         </td>
                       </tr>
